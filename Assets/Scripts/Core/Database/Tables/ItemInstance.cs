@@ -11,4 +11,10 @@ public class ItemInstance
 
     [NotNull]
     public int espaco { get; set; } 
+
+    [NotNull]
+    public float durabilidade { get; set; }
+
+    [NotNull]
+    public float qualidade { get; set; }
 }

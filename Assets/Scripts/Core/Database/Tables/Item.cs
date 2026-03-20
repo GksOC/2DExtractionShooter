@@ -5,7 +5,7 @@ public class Item
     public int ID { get; set; }
 
     [NotNull]
-    public string tipo { get; set; }
+    public int tipoItem { get; set; } //Enum
 
     [NotNull]
     public string nome { get; set; }
