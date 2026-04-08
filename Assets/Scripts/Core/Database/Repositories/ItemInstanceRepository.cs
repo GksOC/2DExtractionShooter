@@ -15,6 +15,7 @@ public class ItemInstanceRepository : BaseRepository<ItemInstance>
         db.BeginTransaction();
         try
         {
+            item.Item_ID = 10;
             // Lógica para atualizar a Origem e o Inventario_Item
             // ...
             db.Update(item);

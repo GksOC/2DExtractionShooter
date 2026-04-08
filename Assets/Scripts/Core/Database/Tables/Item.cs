@@ -17,5 +17,5 @@ public class Item
     public int valor { get; set; }
 
     [NotNull]
-    public string imagem { get; set; } //diretório para um .svg
+    public string imagem { get; set; } //diretÃ³rio para um .svg
 }

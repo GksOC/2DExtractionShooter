@@ -13,7 +13,7 @@ public class Arma
     public int tipoMunicao { get; set; } //tipoConsumivel
 
     [NotNull]
-    public int compatibilidade { get; set; } //bitwise
+    public int compatibilidade { get; set; } //Compatibilidade (bitwise)
 
     [NotNull]
     public int cadencia { get; set; }
