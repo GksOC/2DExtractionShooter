@@ -83,16 +83,34 @@ namespace Assets.Scripts.Core
             {
                 Debug.Log("[Servidor] Tabela 'Item' está vazia. Gerando itens base...");
 
-                // Criação de itens utilizando os atributos exatos da sua Tabela Item
-                var item1 = new Item 
+                // Criando todas as instâncias dos modelos
+                Item item;
+                Arma arma;
+                Consumivel consumivel;
+
+                item = new Item
                 { 
-                    // O ID possui a constraint AutoIncrement, então omitimos para o SQLite gerar sozinho
+                    // O ID possui a constraint AutoIncrement, então omitidos para o SQLite gerar sozinho
                     tipoItem = TipoItem.Arma.GetHashCode(),
                     nome = "AKM", 
                     peso = 3200, 
                     valor = 2700, 
                     imagem = Path.Combine("SVG", "AKM.svg")
                 };
+                db.Insert(item);
+
+                arma = new Arma
+                {
+                    Item_ID = item.ID,
+                    tipoAnexo = TipoAnexo.AK100.GetHashCode(),
+                    tipoMunicao = TipoConsumivel._762x39.GetHashCode(),
+                    compatibilidade = Comaptibilidade.bocal.GetHashCode() + Compatibilidade.mira.GetHashCode(),
+                    cadencia = 600,
+                    velocidade = 670,
+                    ergonomia = 65,
+                    precisao = 1.0
+                };
+                db.Insert(arma);
 
                 var item2 = new Item 
                 { 
@@ -103,8 +121,7 @@ namespace Assets.Scripts.Core
                     imagem = Path.Combine("SVG", "water-bottle.svg")
                 };
 
-                // Insere as entidades no banco de dados usando a função nativa Insert
-                db.Insert(item1);
+
                 db.Insert(item2);
 
                 Debug.Log("[Servidor] Itens de exemplo inseridos com sucesso no catálogo!");
