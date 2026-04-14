@@ -1,6 +1,6 @@
 ﻿enum TipoConsumivel
 {
-    vida        = 0,
+    cura        = 0,
     comida      = 1,
     bebida      = 2,
     _22LR       = 3,

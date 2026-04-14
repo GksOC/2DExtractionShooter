@@ -6,14 +6,14 @@ public class Arma
     [PrimaryKey]
     public int Item_ID { get; set; }
 
-    [NotNull]
+    [NotNull] //Enum
     public int tipoAnexo { get; set; }
 
-    [NotNull]
+    [NotNull] //Enum
     public int tipoMunicao { get; set; } //tipoConsumivel
 
-    [NotNull]
-    public int compatibilidade { get; set; } //Compatibilidade (bitwise)
+    [NotNull] //Enum
+    public int compatibilidade { get; set; } // (bitwise)
 
     [NotNull]
     public int cadencia { get; set; }

@@ -31,6 +31,31 @@ public class DatabaseService : MonoBehaviour
     private void OnApplicationQuit()
     {
         // Fecha a conexão limpa e seguramente ao encerrar o jogo
-        Connection?.Close();
+        CloseConnection();
     }
+
+    private void CloseConnection()
+    {
+        if (Connection != null)
+        {
+            Connection.Close();
+            Connection.Dispose();
+            Connection = null; // Importante para evitar referências a objetos mortos
+        }
+    }
+
+    public void ResetarBancoDeDados()
+    {
+        Debug.Log("APAGANDO SERVIDOR");
+
+        CloseConnection();
+        string dbPath = Path.Combine(Application.persistentDataPath, "ExtractionShooter.db");
+        if (File.Exists(dbPath))
+        {
+            File.Delete(dbPath);
+            Debug.Log("SERVIDOR APAGADO");
+        }
+        Connection = new SQLiteConnection(dbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create);
+    }
+
 }

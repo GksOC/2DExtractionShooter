@@ -6,7 +6,7 @@ public class Carregador
     [PrimaryKey]
     public int Item_ID { get; set; }
 
-    [NotNull]
+    [NotNull] //TipoConsumivel
     public int tipoMunicao { get; set; }
 
     [NotNull]

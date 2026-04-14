@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using Newtonsoft.Json;
 using UnityEngine;
 using System.IO;
 using System.Linq;
 using SQLite4Unity3d;
+using System;
 
 namespace Assets.Scripts.Core
 {
@@ -17,6 +18,9 @@ namespace Assets.Scripts.Core
             dbPath = Path.Combine(Application.persistentDataPath, "ExtractionShooter.db");
 
             Debug.Log("[Servidor] Iniciando verificação do sistema de Banco de Dados...");
+
+            //isso serve para apagar o bando de dados
+            DatabaseService.Instance.ResetarBancoDeDados();
 
             // Verifica fisicamente se o arquivo do banco já existia antes de abrir o jogo
             if (!File.Exists(dbPath))
@@ -87,7 +91,12 @@ namespace Assets.Scripts.Core
                 Item item;
                 Arma arma;
                 Consumivel consumivel;
+                Anexo anexo;
+                Carregador carregador;
+                Armadura armadura;
+                var configJSON = new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore };
 
+                //Armas
                 item = new Item
                 { 
                     // O ID possui a constraint AutoIncrement, então omitidos para o SQLite gerar sozinho
@@ -104,15 +113,16 @@ namespace Assets.Scripts.Core
                     Item_ID = item.ID,
                     tipoAnexo = TipoAnexo.AK100.GetHashCode(),
                     tipoMunicao = TipoConsumivel._762x39.GetHashCode(),
-                    compatibilidade = Comaptibilidade.bocal.GetHashCode() + Compatibilidade.mira.GetHashCode(),
+                    compatibilidade = Compatibilidade.bocal.GetHashCode() + Compatibilidade.mira.GetHashCode(),
                     cadencia = 600,
                     velocidade = 670,
                     ergonomia = 65,
-                    precisao = 1.0
+                    precisao = 1.0f
                 };
                 db.Insert(arma);
 
-                var item2 = new Item 
+                //Consumivel
+                item = new Item 
                 { 
                     tipoItem = TipoItem.Consumivel.GetHashCode(),
                     nome = "Water Bottle", 
@@ -120,9 +130,120 @@ namespace Assets.Scripts.Core
                     valor = 10, 
                     imagem = Path.Combine("SVG", "water-bottle.svg")
                 };
+                db.Insert(item);
+
+                consumivel = new Consumivel
+                {
+                    Item_ID = item.ID,
+                    tipoConsumivel = TipoConsumivel.bebida.GetHashCode(),
+                    capacidadeMax = 4,
+                    efeito = JsonConvert.SerializeObject(new EfeitoAtributos { sede = 25, sanidadeInstantanea = 5, bonusRegeneracaoEnergia = 0.1f}, configJSON)
+                };
+                db.Insert(consumivel);
+
+                //Anexo
+                item = new Item
+                {
+                    tipoItem = TipoItem.Anexo.GetHashCode(),
+                    nome = "OKP-7",
+                    peso = 300,
+                    valor = 300,
+                    imagem = Path.Combine("SVG", "red-dot-sight.svg")
+                };
+                db.Insert(item);
+
+                anexo = new Anexo
+                {
+                    Item_ID = item.ID,
+                    tipoAnexo = TipoAnexo.AK100.GetHashCode(),
+                    efeito = JsonConvert.SerializeObject(new EfeitoAtributos { boostPrecisao = 0.25f, boostErgonomia = 0.05f, boostVelocidadeMira = 0.15f }, configJSON)
+                };
+                db.Insert(anexo);
 
 
-                db.Insert(item2);
+                item = new Item
+                {
+                    tipoItem = TipoItem.Anexo.GetHashCode(),
+                    nome = "PU Mosin Scope",
+                    peso = 300,
+                    valor = 1000,
+                    imagem = Path.Combine("SVG", "sniper-sight.svg")
+                };
+                db.Insert(item);
+
+                anexo = new Anexo
+                {
+                    Item_ID = item.ID,
+                    tipoAnexo = TipoAnexo.AK100.GetHashCode(),
+                    efeito = JsonConvert.SerializeObject(new EfeitoAtributos { boostPrecisao = 0.5f, boostErgonomia = -0.15f, boostVelocidadeMira = -0.10f }, configJSON)
+                };
+                db.Insert(anexo);
+
+                //Carregador
+                item = new Item
+                {
+                    tipoItem = TipoItem.Carregador.GetHashCode(),
+                    nome = "Carregador padrão AK",
+                    peso = 330,
+                    valor = 100,
+                    imagem = Path.Combine("SVG", "AK-mag.svg")
+                };
+                db.Insert(item);
+
+                carregador = new Carregador
+                {
+                    Item_ID = item.ID,
+                    capacidadeMax = 30,
+                    tipoMunicao = TipoConsumivel._762x39.GetHashCode()
+                };
+                db.Insert(carregador);
+
+
+                item = new Item
+                {
+                    tipoItem = TipoItem.Carregador.GetHashCode(),
+                    nome = "Carregador pequeno padrão AK",
+                    peso = 240,
+                    valor = 60,
+                    imagem = Path.Combine("SVG", "AK-small-mag.svg")
+                };
+                db.Insert(item);
+
+                carregador = new Carregador
+                {
+                    Item_ID = item.ID,
+                    capacidadeMax = 20,
+                    tipoMunicao = TipoConsumivel._762x39.GetHashCode()
+                };
+                db.Insert(carregador);
+
+
+                //Armadura
+                item = new Item
+                {
+                    tipoItem = TipoItem.Armadura.GetHashCode(),
+                    nome = "Colete IIA",
+                    peso = 1450,
+                    valor = 1200,
+                    imagem = Path.Combine("SVG", "kevlar-vest.svg")
+                };
+                db.Insert(item);
+
+                armadura = new Armadura
+                {
+                    Item_ID = item.ID,
+                    tipoProtecao = TipoArmadura.Colete.GetHashCode(),
+                    cobertura = 0.85f,
+                    durabilidadeMax = 200,
+                    protecao = 1f,
+                    absorção = 0.6f
+                };
+                db.Insert(armadura);
+
+                //Mochila
+
+
+                //Explosivo
 
                 Debug.Log("[Servidor] Itens de exemplo inseridos com sucesso no catálogo!");
             }
@@ -138,17 +259,31 @@ namespace Assets.Scripts.Core
             var db = DatabaseService.Instance.Connection;
             
             // Resgata todos os itens cadastrados no banco de dados
-            var todosOsItens = db.Table<Item>().ToList();
-
-            Debug.Log("=== LOG DA TABELA DE ITENS (CATÁLOGO BASE) ===");
-            
-            foreach (var item in todosOsItens)
+            var itens = db.Table<Item>().ToList();
+            Debug.Log("=== LOG DA TABELA DE ITENS ===");  
+            foreach (var item in itens)
             {
-                // Interpolação de string formatada para facilitar a leitura no console
                 Debug.Log($"ID: {item.ID} | Nome: {item.nome} | Tipo (Enum): {item.tipoItem} | Peso: {item.peso}g | Valor: $ {item.valor} | Caminho: {item.imagem}");
             }
-            
             Debug.Log("==============================================");
+
+
+            var armas = db.Table<Arma>().ToList();
+            Debug.Log("=== LOG DA TABELA DE ARMAS ===");
+            foreach (var arma in armas)
+            {
+                Debug.Log($"ID: {arma.Item_ID} | Nome: { itens.FirstOrDefault(x => x.ID == arma.Item_ID).nome } | Tipo Anexo: { Enum.GetName(typeof(TipoAnexo), arma.tipoAnexo.GetHashCode()) } | Tipo Munição: { Enum.GetName(typeof(TipoConsumivel), arma.tipoMunicao.GetHashCode()) } | Compatibilidade: { Convert.ToString(arma.compatibilidade, 2) } | Cadência: { arma.cadencia } | Velocidade: { arma.velocidade } | Ergonomia: { arma.ergonomia } | Precisão (dispersão em graus): { arma.precisao }");
+            }
+            Debug.Log("==============================================");
+
+            var consumiveis = db.Table<Consumivel>().ToList();
+            Debug.Log("=== LOG DA TABELA DE CONSUMÍVEIS ===");
+            foreach (var cons in consumiveis)
+            {
+                Debug.Log($"ID: {cons.Item_ID} | Nome: { itens.FirstOrDefault(x => x.ID == cons.Item_ID).nome } | Tipo Consumível: { Enum.GetName(typeof(TipoConsumivel), cons.tipoConsumivel.GetHashCode()) } | Capacidade máxima: { cons.capacidadeMax } | Efeitos: { cons.efeito }");
+            }
+            Debug.Log("==============================================");
+
         }
     }
 }

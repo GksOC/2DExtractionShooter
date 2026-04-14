@@ -4,8 +4,8 @@ public class Item
     [PrimaryKey, AutoIncrement] 
     public int ID { get; set; }
 
-    [NotNull]
-    public int tipoItem { get; set; } //Enum
+    [NotNull] //Enum
+    public int tipoItem { get; set; }
 
     [NotNull]
     public string nome { get; set; }

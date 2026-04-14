@@ -6,7 +6,7 @@ public class Explosivo
     [PrimaryKey]
     public int Item_ID { get; set; }
 
-    [NotNull]
+    [NotNull] //Enum
     public int tipoExplosivo { get; set; }
 
     [NotNull]

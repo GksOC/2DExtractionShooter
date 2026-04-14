@@ -6,7 +6,7 @@ public class Consumivel
     [PrimaryKey]
     public int Item_ID { get; set; }
 
-    [NotNull]
+    [NotNull] //Enum
     public int tipoConsumivel { get; set; }
 
     [NotNull]

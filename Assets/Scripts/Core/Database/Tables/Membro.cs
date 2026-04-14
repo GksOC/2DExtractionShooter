@@ -6,8 +6,8 @@ public class Membro
     [PrimaryKey, AutoIncrement] 
     public int ID { get; set; }
 
-    [NotNull]
-    public string nome { get; set; }
+    [NotNull] //Enum NomeMembro
+    public int nome { get; set; }
 
     [NotNull]
     public bool sangrando { get; set; }
