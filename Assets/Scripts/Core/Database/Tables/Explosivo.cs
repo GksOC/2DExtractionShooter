@@ -13,11 +13,10 @@ public class Explosivo
     public int dano { get; set; }
 
     [NotNull]
-    public int raio { get; set; }
+    public int raio { get; set; } //em centímetros
 
     [NotNull]
     public int ignicao { get; set; }
 
-    [NotNull]
     public int angulo { get; set; }
 }

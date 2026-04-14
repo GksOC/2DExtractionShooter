@@ -94,6 +94,8 @@ namespace Assets.Scripts.Core
                 Anexo anexo;
                 Carregador carregador;
                 Armadura armadura;
+                Mochila mochila;
+                Explosivo explosivo;
                 var configJSON = new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore };
 
                 //Armas
@@ -122,6 +124,67 @@ namespace Assets.Scripts.Core
                 db.Insert(arma);
 
                 //Consumivel
+                    //Bebida
+                item = new Item 
+                { 
+                    tipoItem = TipoItem.Consumivel.GetHashCode(),
+                    nome = "Water Bottle", 
+                    peso = 500, 
+                    valor = 10, 
+                    imagem = Path.Combine("SVG", "water-bottle.svg")
+                };
+                db.Insert(item);
+
+                consumivel = new Consumivel
+                {
+                    Item_ID = item.ID,
+                    tipoConsumivel = TipoConsumivel.bebida.GetHashCode(),
+                    capacidadeMax = 4,
+                    efeito = JsonConvert.SerializeObject(new EfeitoAtributos { sede = 25, sanidadeInstantanea = 5, bonusRegeneracaoEnergia = 0.1f, tempoBonusRegeneracaoEnergia = 60 }, configJSON)
+                };
+                db.Insert(consumivel);
+
+                    //Comida
+                item = new Item 
+                { 
+                    tipoItem = TipoItem.Consumivel.GetHashCode(),
+                    nome = "Canned food", 
+                    peso = 500, 
+                    valor = 20, 
+                    imagem = Path.Combine("SVG", "canned-food.svg")
+                };
+                db.Insert(item);
+
+                consumivel = new Consumivel
+                {
+                    Item_ID = item.ID,
+                    tipoConsumivel = TipoConsumivel.comida.GetHashCode(),
+                    capacidadeMax = 4,
+                    efeito = JsonConvert.SerializeObject(new EfeitoAtributos { sede = 8, fome = 25, sanidadeInstantanea = 5, bonusRegeneracaoEnergia = 0.1f, tempoBonusRegeneracaoEnergia = 60, boostVelocidade = -0.1f, tempoBoostVelocidade = 20}, configJSON)
+                };
+                db.Insert(consumivel);
+
+
+                item = new Item 
+                { 
+                    tipoItem = TipoItem.Consumivel.GetHashCode(),
+                    nome = "Dry meat", 
+                    peso = 100, 
+                    valor = 10, 
+                    imagem = Path.Combine("SVG", "dry-meat.svg")
+                };
+                db.Insert(item);
+
+                consumivel = new Consumivel
+                {
+                    Item_ID = item.ID,
+                    tipoConsumivel = TipoConsumivel.comida.GetHashCode(),
+                    capacidadeMax = 10,
+                    efeito = JsonConvert.SerializeObject(new EfeitoAtributos { sede = -10, fome = 20, sanidadeInstantanea = 2, bonusRegeneracaoEnergia = 0.12f, tempoBonusRegeneracaoEnergia = 60, boostVelocidade = 0.05f, tempoBoostVelocidade = 20}, configJSON)
+                };
+                db.Insert(consumivel);
+
+                    //bebida
                 item = new Item 
                 { 
                     tipoItem = TipoItem.Consumivel.GetHashCode(),
@@ -138,6 +201,46 @@ namespace Assets.Scripts.Core
                     tipoConsumivel = TipoConsumivel.bebida.GetHashCode(),
                     capacidadeMax = 4,
                     efeito = JsonConvert.SerializeObject(new EfeitoAtributos { sede = 25, sanidadeInstantanea = 5, bonusRegeneracaoEnergia = 0.1f}, configJSON)
+                };
+                db.Insert(consumivel);
+
+                    //munição
+                item = new Item 
+                { 
+                    tipoItem = TipoItem.Consumivel.GetHashCode(),
+                    nome = "Standard 7,62x39mm", 
+                    peso = 30, 
+                    valor = 3, 
+                    imagem = Path.Combine("SVG", "AK-ammo.svg")
+                };
+                db.Insert(item);
+
+                consumivel = new Consumivel
+                {
+                    Item_ID = item.ID,
+                    tipoConsumivel = TipoConsumivel._762x39.GetHashCode(),
+                    capacidadeMax = 50,
+                    efeito = JsonConvert.SerializeObject(new EfeitoAtributos { saudeInstantanea = 76, penetracao = 1.6f}, configJSON)
+                };
+                db.Insert(consumivel);
+
+
+                item = new Item 
+                { 
+                    tipoItem = TipoItem.Consumivel.GetHashCode(),
+                    nome = "Armor Piercing 7,62x39mm", 
+                    peso = 35, 
+                    valor = 30, 
+                    imagem = Path.Combine("SVG", "AK-ammo.svg")
+                };
+                db.Insert(item);
+
+                consumivel = new Consumivel
+                {
+                    Item_ID = item.ID,
+                    tipoConsumivel = TipoConsumivel._762x39.GetHashCode(),
+                    capacidadeMax = 50,
+                    efeito = JsonConvert.SerializeObject(new EfeitoAtributos { saudeInstantanea = 76, penetracao = 1.95f}, configJSON)
                 };
                 db.Insert(consumivel);
 
@@ -183,7 +286,7 @@ namespace Assets.Scripts.Core
                 item = new Item
                 {
                     tipoItem = TipoItem.Carregador.GetHashCode(),
-                    nome = "Carregador padrão AK",
+                    nome = "Standard AK mag",
                     peso = 330,
                     valor = 100,
                     imagem = Path.Combine("SVG", "AK-mag.svg")
@@ -202,7 +305,7 @@ namespace Assets.Scripts.Core
                 item = new Item
                 {
                     tipoItem = TipoItem.Carregador.GetHashCode(),
-                    nome = "Carregador pequeno padrão AK",
+                    nome = "Small standard AK mag",
                     peso = 240,
                     valor = 60,
                     imagem = Path.Combine("SVG", "AK-small-mag.svg")
@@ -222,7 +325,7 @@ namespace Assets.Scripts.Core
                 item = new Item
                 {
                     tipoItem = TipoItem.Armadura.GetHashCode(),
-                    nome = "Colete IIA",
+                    nome = "Level IIA vest",
                     peso = 1450,
                     valor = 1200,
                     imagem = Path.Combine("SVG", "kevlar-vest.svg")
@@ -234,16 +337,137 @@ namespace Assets.Scripts.Core
                     Item_ID = item.ID,
                     tipoProtecao = TipoArmadura.Colete.GetHashCode(),
                     cobertura = 0.85f,
-                    durabilidadeMax = 200,
+                    durabilidadeMax = 300,
                     protecao = 1f,
-                    absorção = 0.6f
+                    absorção = 0.75f
+                };
+                db.Insert(armadura);
+
+                
+                item = new Item
+                {
+                    tipoItem = TipoItem.Armadura.GetHashCode(),
+                    nome = "Level II vest",
+                    peso = 1750,
+                    valor = 1600,
+                    imagem = Path.Combine("SVG", "kevlar-vest.svg")
+                };
+                db.Insert(item);
+
+                armadura = new Armadura
+                {
+                    Item_ID = item.ID,
+                    tipoProtecao = TipoArmadura.Colete.GetHashCode(),
+                    cobertura = 0.85f,
+                    durabilidadeMax = 300,
+                    protecao = 1f,
+                    absorção = 0.68f
+                };
+                db.Insert(armadura);
+
+
+                item = new Item
+                {
+                    tipoItem = TipoItem.Armadura.GetHashCode(),
+                    nome = "Level IIIA vest",
+                    peso = 2000,
+                    valor = 2100,
+                    imagem = Path.Combine("SVG", "kevlar-vest.svg")
+                };
+                db.Insert(item);
+
+                armadura = new Armadura
+                {
+                    Item_ID = item.ID,
+                    tipoProtecao = TipoArmadura.Colete.GetHashCode(),
+                    cobertura = 0.85f,
+                    durabilidadeMax = 250,
+                    protecao = 1f,
+                    absorção = 0.63f
                 };
                 db.Insert(armadura);
 
                 //Mochila
+                item = new Item
+                {
+                    tipoItem = TipoItem.Mochila.GetHashCode(),
+                    nome = "Mochila escolar",
+                    peso = 500,
+                    valor = 100,
+                    imagem = Path.Combine("SVG", "backpack.svg")
+                };
+                db.Insert(item);
 
+                mochila = new Mochila
+                {
+                    Item_ID = item.ID,
+                    capacidadeBase = 15,
+                    espacoBase = 5,
+                    pesoMaximo = 15000
+                };
+                db.Insert(mochila);
+
+
+                item = new Item
+                {
+                    tipoItem = TipoItem.Mochila.GetHashCode(),
+                    nome = "Traveler's backpack",
+                    peso = 800,
+                    valor = 400,
+                    imagem = Path.Combine("SVG", "traveler-backpack.svg")
+                };
+                db.Insert(item);
+
+                mochila = new Mochila
+                {
+                    Item_ID = item.ID,
+                    capacidadeBase = 22,
+                    espacoBase = 8,
+                    pesoMaximo = 30000
+                };
+                db.Insert(mochila);
+
+
+                item = new Item
+                {
+                    tipoItem = TipoItem.Mochila.GetHashCode(),
+                    nome = "Militar backpack",
+                    peso = 1000,
+                    valor = 800,
+                    imagem = Path.Combine("SVG", "big-backpack.svg")
+                };
+                db.Insert(item);
+
+                mochila = new Mochila
+                {
+                    Item_ID = item.ID,
+                    capacidadeBase = 30,
+                    espacoBase = 12,
+                    pesoMaximo = 35000
+                };
+                db.Insert(mochila);
 
                 //Explosivo
+                item = new Item 
+                { 
+                    tipoItem = TipoItem.Explosivo.GetHashCode(),
+                    nome = "M1 Granade", 
+                    peso = 300, 
+                    valor = 200, 
+                    imagem = Path.Combine("SVG", "granade.svg")
+                };
+                db.Insert(item);
+
+                explosivo = new Explosivo
+                {
+                    item_ID = item.ID,
+                    tipoExplosivo = TipoExplosivo.arremessavel.GetHashCode(),
+                    dano = 100,
+                    raio = 1000,
+                    ignicao = 5,
+                };
+                db.Insert(explosivo);
+
 
                 Debug.Log("[Servidor] Itens de exemplo inseridos com sucesso no catálogo!");
             }

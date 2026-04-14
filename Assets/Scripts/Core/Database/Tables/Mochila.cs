@@ -11,4 +11,7 @@ public class Mochila
 
     [NotNull]
     public int espacoBase { get; set; }
+
+    [NotNull]
+    public int pesoMaximo {get; set;}
 }
