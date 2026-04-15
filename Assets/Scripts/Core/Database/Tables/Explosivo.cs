@@ -18,5 +18,5 @@ public class Explosivo
     [NotNull]
     public int ignicao { get; set; }
 
-    public int angulo { get; set; }
+    public int? angulo { get; set; }
 }

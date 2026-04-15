@@ -73,7 +73,7 @@ namespace Assets.Scripts.Core
             }
         }
 
-        // 1. Método para verificar e preencher a tabela base (Exemplo com Item)
+        // Verificar e preencher a tabela base
         private void VerificarEPreencherItens()
         {
             // Acessa a conexão central do Singleton
@@ -184,34 +184,33 @@ namespace Assets.Scripts.Core
                 };
                 db.Insert(consumivel);
 
-                    //bebida
-                item = new Item 
-                { 
+                item = new Item
+                {
                     tipoItem = TipoItem.Consumivel.GetHashCode(),
-                    nome = "Water Bottle", 
-                    peso = 500, 
-                    valor = 10, 
-                    imagem = Path.Combine("SVG", "water-bottle.svg")
+                    nome = "MRE",
+                    peso = 2500,
+                    valor = 500,
+                    imagem = Path.Combine("SVG", "MRE.svg")
                 };
                 db.Insert(item);
 
                 consumivel = new Consumivel
                 {
                     Item_ID = item.ID,
-                    tipoConsumivel = TipoConsumivel.bebida.GetHashCode(),
-                    capacidadeMax = 4,
-                    efeito = JsonConvert.SerializeObject(new EfeitoAtributos { sede = 25, sanidadeInstantanea = 5, bonusRegeneracaoEnergia = 0.1f}, configJSON)
+                    tipoConsumivel = TipoConsumivel.comida.GetHashCode(),
+                    capacidadeMax = 1,
+                    efeito = JsonConvert.SerializeObject(new EfeitoAtributos { sede = 60, fome = 75, sanidadeInstantanea = 10, bonusRegeneracaoEnergia = 0.2f, tempoBonusRegeneracaoEnergia = 120, boostVelocidade = 0.1f, tempoBoostVelocidade = 60 }, configJSON)
                 };
                 db.Insert(consumivel);
 
-                    //munição
+                //munição
                 item = new Item 
                 { 
                     tipoItem = TipoItem.Consumivel.GetHashCode(),
                     nome = "Standard 7,62x39mm", 
                     peso = 30, 
                     valor = 3, 
-                    imagem = Path.Combine("SVG", "AK-ammo.svg")
+                    imagem = Path.Combine("SVG", "std-762x39mm.svg")
                 };
                 db.Insert(item);
 
@@ -220,7 +219,7 @@ namespace Assets.Scripts.Core
                     Item_ID = item.ID,
                     tipoConsumivel = TipoConsumivel._762x39.GetHashCode(),
                     capacidadeMax = 50,
-                    efeito = JsonConvert.SerializeObject(new EfeitoAtributos { saudeInstantanea = 76, penetracao = 1.6f}, configJSON)
+                    efeito = JsonConvert.SerializeObject(new EfeitoAtributos { saudeInstantanea = -76, perfuracao = 1.6f}, configJSON)
                 };
                 db.Insert(consumivel);
 
@@ -231,7 +230,7 @@ namespace Assets.Scripts.Core
                     nome = "Armor Piercing 7,62x39mm", 
                     peso = 35, 
                     valor = 30, 
-                    imagem = Path.Combine("SVG", "AK-ammo.svg")
+                    imagem = Path.Combine("SVG", "std-762x39mm.svg")
                 };
                 db.Insert(item);
 
@@ -240,7 +239,7 @@ namespace Assets.Scripts.Core
                     Item_ID = item.ID,
                     tipoConsumivel = TipoConsumivel._762x39.GetHashCode(),
                     capacidadeMax = 50,
-                    efeito = JsonConvert.SerializeObject(new EfeitoAtributos { saudeInstantanea = 76, penetracao = 1.95f}, configJSON)
+                    efeito = JsonConvert.SerializeObject(new EfeitoAtributos { saudeInstantanea = -76, perfuracao = 1.95f}, configJSON)
                 };
                 db.Insert(consumivel);
 
@@ -360,7 +359,7 @@ namespace Assets.Scripts.Core
                     tipoProtecao = TipoArmadura.Colete.GetHashCode(),
                     cobertura = 0.85f,
                     durabilidadeMax = 300,
-                    protecao = 1f,
+                    protecao = 1.25f,
                     absorção = 0.68f
                 };
                 db.Insert(armadura);
@@ -382,7 +381,7 @@ namespace Assets.Scripts.Core
                     tipoProtecao = TipoArmadura.Colete.GetHashCode(),
                     cobertura = 0.85f,
                     durabilidadeMax = 250,
-                    protecao = 1f,
+                    protecao = 1.5f,
                     absorção = 0.63f
                 };
                 db.Insert(armadura);
@@ -460,7 +459,7 @@ namespace Assets.Scripts.Core
 
                 explosivo = new Explosivo
                 {
-                    item_ID = item.ID,
+                    Item_ID = item.ID,
                     tipoExplosivo = TipoExplosivo.arremessavel.GetHashCode(),
                     dano = 100,
                     raio = 1000,
@@ -477,7 +476,7 @@ namespace Assets.Scripts.Core
             }
         }
 
-        // 2. Método para fazer o Log da tabela e visualizar como o banco de dados está
+        // Log da tabela e visualizar como o banco de dados está
         private void LogTabelaItens()
         {
             var db = DatabaseService.Instance.Connection;
@@ -487,7 +486,7 @@ namespace Assets.Scripts.Core
             Debug.Log("=== LOG DA TABELA DE ITENS ===");  
             foreach (var item in itens)
             {
-                Debug.Log($"ID: {item.ID} | Nome: {item.nome} | Tipo (Enum): {item.tipoItem} | Peso: {item.peso}g | Valor: $ {item.valor} | Caminho: {item.imagem}");
+                Debug.Log($"ID: {item.ID} | Nome: {item.nome} | Tipo: { Enum.GetName(typeof(TipoItem), item.tipoItem.GetHashCode()) } | Peso: {item.peso}g | Valor: ${item.valor} | Caminho: {item.imagem}");
             }
             Debug.Log("==============================================");
 
@@ -496,7 +495,7 @@ namespace Assets.Scripts.Core
             Debug.Log("=== LOG DA TABELA DE ARMAS ===");
             foreach (var arma in armas)
             {
-                Debug.Log($"ID: {arma.Item_ID} | Nome: { itens.FirstOrDefault(x => x.ID == arma.Item_ID).nome } | Tipo Anexo: { Enum.GetName(typeof(TipoAnexo), arma.tipoAnexo.GetHashCode()) } | Tipo Munição: { Enum.GetName(typeof(TipoConsumivel), arma.tipoMunicao.GetHashCode()) } | Compatibilidade: { Convert.ToString(arma.compatibilidade, 2) } | Cadência: { arma.cadencia } | Velocidade: { arma.velocidade } | Ergonomia: { arma.ergonomia } | Precisão (dispersão em graus): { arma.precisao }");
+                Debug.Log($"ID: {arma.Item_ID} | Nome: { itens.FirstOrDefault(x => x.ID == arma.Item_ID).nome } | Tipo Anexo: { Enum.GetName(typeof(TipoAnexo), arma.tipoAnexo.GetHashCode()) } | Tipo Munição: { Enum.GetName(typeof(TipoConsumivel), arma.tipoMunicao.GetHashCode()) } | Compatibilidade: { Convert.ToString(arma.compatibilidade, 2) } | Cadência: { arma.cadencia }DPM | Velocidade: { arma.velocidade }m/s | Ergonomia: { arma.ergonomia } | Precisão (dispersão em graus): { arma.precisao }");
             }
             Debug.Log("==============================================");
 
@@ -505,6 +504,47 @@ namespace Assets.Scripts.Core
             foreach (var cons in consumiveis)
             {
                 Debug.Log($"ID: {cons.Item_ID} | Nome: { itens.FirstOrDefault(x => x.ID == cons.Item_ID).nome } | Tipo Consumível: { Enum.GetName(typeof(TipoConsumivel), cons.tipoConsumivel.GetHashCode()) } | Capacidade máxima: { cons.capacidadeMax } | Efeitos: { cons.efeito }");
+            }
+            Debug.Log("==============================================");
+
+            var anexos = db.Table<Anexo>().ToList();
+            Debug.Log("=== LOG DA TABELA DE ANEXOS ===");
+            foreach (var anexo in anexos)
+            {
+                Debug.Log($"ID: {anexo.Item_ID} | Nome: { itens.FirstOrDefault(x => x.ID == anexo.Item_ID).nome } | Tipo Anexo: { Enum.GetName(typeof(TipoAnexo), anexo.tipoAnexo.GetHashCode()) } | Efeitos: { anexo.efeito }");
+            }
+            Debug.Log("==============================================");
+
+            var carregadores = db.Table<Carregador>().ToList();
+            Debug.Log("=== LOG DA TABELA DE CARREGADORES ===");
+            foreach (var carregador in carregadores)
+            {
+                Debug.Log($"ID: {carregador.Item_ID} | Nome: { itens.FirstOrDefault(x => x.ID == carregador.Item_ID).nome } | Tipo Munição: { Enum.GetName(typeof(TipoConsumivel), carregador.tipoMunicao.GetHashCode()) } | Capacidade máxima: { carregador.capacidadeMax }");
+            }
+            Debug.Log("==============================================");
+
+            var armaduras = db.Table<Armadura>().ToList();
+            Debug.Log("=== LOG DA TABELA DE ARMADURA ===");
+            foreach (var armadura in armaduras)
+            {
+                Debug.Log($"ID: {armadura.Item_ID} | Nome: { itens.FirstOrDefault(x => x.ID == armadura.Item_ID).nome } | Tipo Anexo: { Enum.GetName(typeof(TipoArmadura), armadura.tipoProtecao.GetHashCode()) } | Nível de proteção: { armadura.protecao } | Absorção: { armadura.absorção } | Cobertura: { armadura.cobertura } | Durabilidade Máxima: { armadura.durabilidadeMax }");
+            }
+            Debug.Log("==============================================");
+
+            var mochilas = db.Table<Mochila>().ToList();
+            Debug.Log("=== LOG DA TABELA DE ANEXOS ===");
+            foreach (var mochila in mochilas)
+            {
+                Debug.Log($"ID: {mochila.Item_ID} | Nome: { itens.FirstOrDefault(x => x.ID == mochila.Item_ID).nome } | Capacidade máxima: { mochila.capacidadeBase } | Espaço base: { mochila.espacoBase } slots | Capacidade de peso {mochila.pesoMaximo}g");
+            }
+            Debug.Log("==============================================");
+
+            var explosivos = db.Table<Explosivo>().ToList();
+            Debug.Log("=== LOG DA TABELA DE ANEXOS ===");
+            foreach (var explosivo in explosivos)
+            {
+                string temp = (explosivo.angulo == 0) || (explosivo.angulo == null) ? "Explosão radial" : $"{explosivo.angulo}°";
+                Debug.Log($"ID: {explosivo.Item_ID} | Nome: { itens.FirstOrDefault(x => x.ID == explosivo.Item_ID).nome } | Tipo Anexo: { Enum.GetName(typeof(TipoExplosivo), explosivo.tipoExplosivo.GetHashCode()) } | Dano: { explosivo.dano } | Raio de alcance: {explosivo.raio}cm | Tempo de ignição: {explosivo.ignicao }s | Ângulo de projeção: {temp}");
             }
             Debug.Log("==============================================");
 
