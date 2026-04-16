@@ -1,0 +1,13 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Created using Krita: https://krita.org -->
+<svg xmlns="http://www.w3.org/2000/svg" 
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:krita="http://krita.org/namespaces/svg/krita"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    width="73.7705pt"
+    height="118.033pt"
+    viewBox="0 0 73.7705 118.033">
+<defs/>
+<path id="shape0" transform="translate(0, -0.126346088733038)" fill="#000000" fill-rule="evenodd" stroke="#000000" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="2" d="M26.1509 0.0618642C36.1145 -0.0975732 43.6804 0.101893 56.582 0.0986822C58.4903 0.0491745 60.1717 0.363384 59.8816 2.94591L43.082 88.6233L46.0328 88.6233C46.8151 89.0737 47.7899 89.3841 47.8033 90.3938L47.7894 101.741C47.691 102.361 46.9686 103.06 46.3002 103.405L1.18033 103.377C0.593885 102.98 0.298794 102.292 0 101.607L0 90.9839C0.361161 90.0944 0.922958 89.0313 1.77049 88.6233L5.90164 88.6233L23.2148 2.05732C23.4819 0.870324 24.2308 0.0366358 26.1509 0.0618642ZM27.7377 5.41016L33.0492 5.41016L20.3827 79.1059C19.9786 80.0585 20.5957 81.1449 21.4672 80.9511L23.9708 80.9511C24.7173 80.9247 25.5279 81.1304 25.7053 79.041L38.3607 5.41016L53.7049 5.41016L37.7705 88.6233L11.2131 88.6233L27.7377 5.41016M5.90164 93.9347L41.9016 93.9347L41.9016 98.6561L5.90164 98.6561L5.90164 93.9347" sodipodi:nodetypes="ccccccccccccccccccccccccccccccc"/>
+</svg>

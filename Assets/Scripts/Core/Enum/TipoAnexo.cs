@@ -4,5 +4,6 @@
     AK200 = 1 << 1,
     AR15 = 1 << 2,
     Picatinny = 1 << 3,
-    Mlock = 1 << 4
+    Mlock = 1 << 4,
+    Handgun = 1 << 5
 }

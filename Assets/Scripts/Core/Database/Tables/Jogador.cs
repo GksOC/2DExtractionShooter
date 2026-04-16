@@ -1,8 +1,7 @@
 using SQLite4Unity3d;
 
 [Table("Jogador")]
-public class JogadorTable
-{
+public class Jogador { 
     [PrimaryKey, AutoIncrement]
     public int ID { get; set; }
 

@@ -62,7 +62,7 @@ namespace Assets.Scripts.Core
                 // 3. Gerando as tabelas de Entidades Vivas
                 db.CreateTable<Corpo>(); // [14]
                 db.CreateTable<Membro>(); // [15]
-                db.CreateTable<JogadorTable>(); // [16]
+                db.CreateTable<Jogador>(); // [16]
                 db.CreateTable<Inimigo>(); // [17]
 
                 Debug.Log("[Servidor] Sucesso! Todas as tabelas base foram criadas/validadas no banco de dados.");
@@ -120,6 +120,30 @@ namespace Assets.Scripts.Core
                     velocidade = 670,
                     ergonomia = 65,
                     precisao = 1.0f
+                };
+                db.Insert(arma);
+
+
+                item = new Item
+                {
+                    tipoItem = TipoItem.Arma.GetHashCode(),
+                    nome = "Glock 17",
+                    peso = 630,
+                    valor = 1500,
+                    imagem = Path.Combine("SVG", "Glock.svg")
+                };
+                db.Insert(item);
+
+                arma = new Arma
+                {
+                    Item_ID = item.ID,
+                    tipoAnexo = TipoAnexo.Handgun.GetHashCode(),
+                    tipoMunicao = TipoConsumivel._9mm.GetHashCode(),
+                    compatibilidade = Compatibilidade.bocal.GetHashCode() + Compatibilidade.mira.GetHashCode(),
+                    cadencia = 300,
+                    velocidade = 350,
+                    ergonomia = 80,
+                    precisao = 2.0f
                 };
                 db.Insert(arma);
 
@@ -203,7 +227,7 @@ namespace Assets.Scripts.Core
                 };
                 db.Insert(consumivel);
 
-                //munição
+                    //munição
                 item = new Item 
                 { 
                     tipoItem = TipoItem.Consumivel.GetHashCode(),
@@ -218,7 +242,7 @@ namespace Assets.Scripts.Core
                 {
                     Item_ID = item.ID,
                     tipoConsumivel = TipoConsumivel._762x39.GetHashCode(),
-                    capacidadeMax = 50,
+                    capacidadeMax = 30,
                     efeito = JsonConvert.SerializeObject(new EfeitoAtributos { saudeInstantanea = -76, perfuracao = 1.6f}, configJSON)
                 };
                 db.Insert(consumivel);
@@ -238,8 +262,47 @@ namespace Assets.Scripts.Core
                 {
                     Item_ID = item.ID,
                     tipoConsumivel = TipoConsumivel._762x39.GetHashCode(),
-                    capacidadeMax = 50,
+                    capacidadeMax = 30,
                     efeito = JsonConvert.SerializeObject(new EfeitoAtributos { saudeInstantanea = -76, perfuracao = 1.95f}, configJSON)
+                };
+                db.Insert(consumivel);
+
+                item = new Item
+                {
+                    tipoItem = TipoItem.Consumivel.GetHashCode(),
+                    nome = "Standard 9x19mm",
+                    peso = 11,
+                    valor = 1,
+                    imagem = Path.Combine("SVG", "std-handgun-ammo.svg")
+                };
+                db.Insert(item);
+
+                consumivel = new Consumivel
+                {
+                    Item_ID = item.ID,
+                    tipoConsumivel = TipoConsumivel._9mm.GetHashCode(),
+                    capacidadeMax = 50,
+                    efeito = JsonConvert.SerializeObject(new EfeitoAtributos { saudeInstantanea = -90, perfuracao = 1f }, configJSON)
+                };
+                db.Insert(consumivel);
+
+
+                item = new Item
+                {
+                    tipoItem = TipoItem.Consumivel.GetHashCode(),
+                    nome = "+P+ 9x19mm",
+                    peso = 12,
+                    valor = 20,
+                    imagem = Path.Combine("SVG", "std-handgun-ammo.svg")
+                };
+                db.Insert(item);
+
+                consumivel = new Consumivel
+                {
+                    Item_ID = item.ID,
+                    tipoConsumivel = TipoConsumivel._9mm.GetHashCode(),
+                    capacidadeMax = 50,
+                    efeito = JsonConvert.SerializeObject(new EfeitoAtributos { saudeInstantanea = -90, perfuracao = 1.25f }, configJSON)
                 };
                 db.Insert(consumivel);
 
@@ -316,6 +379,25 @@ namespace Assets.Scripts.Core
                     Item_ID = item.ID,
                     capacidadeMax = 20,
                     tipoMunicao = TipoConsumivel._762x39.GetHashCode()
+                };
+                db.Insert(carregador);
+
+
+                item = new Item
+                {
+                    tipoItem = TipoItem.Carregador.GetHashCode(),
+                    nome = "std Glock mag",
+                    peso = 50,
+                    valor = 30,
+                    imagem = Path.Combine("SVG", "GlockMagazine.svg")
+                };
+                db.Insert(item);
+
+                carregador = new Carregador
+                {
+                    Item_ID = item.ID,
+                    capacidadeMax = 15,
+                    tipoMunicao = TipoConsumivel._9mm.GetHashCode()
                 };
                 db.Insert(carregador);
 
