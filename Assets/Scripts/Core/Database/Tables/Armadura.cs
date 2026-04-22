@@ -28,7 +28,7 @@ public class Armadura
     */
 
     [NotNull]
-    public float cobertura { get; set; }
+    public float cobertura { get; set; } //% de chance de receber o tiro no colete ao invés de uma região não protegida
 
     [NotNull]
     public int durabilidadeMax { get; set; } //define o quanto consegue absorver de dano

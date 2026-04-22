@@ -7,11 +7,8 @@ public class Origem {
 
     public int? dono_ID { get; set; } // NULL permitido
 
-    [NotNull]
-    public int tipoOrigem  { get; set; } //Enum
-
-    [NotNull]
-    public bool fisico { get; set; }
+    [NotNull] //Enum TipoOrigem
+    public int tipoOrigem  { get; set; }
 
     [NotNull]
     public bool permanente { get; set; }

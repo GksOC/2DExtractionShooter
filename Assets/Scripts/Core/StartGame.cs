@@ -359,7 +359,8 @@ namespace Assets.Scripts.Core
                 {
                     Item_ID = item.ID,
                     capacidadeMax = 30,
-                    tipoMunicao = TipoConsumivel._762x39.GetHashCode()
+                    tipoMunicao = TipoConsumivel._762x39.GetHashCode(),
+                    tipoAnexo = TipoAnexo.AK100.GetHashCode() + TipoAnexo.AK200.GetHashCode()
                 };
                 db.Insert(carregador);
 
@@ -378,7 +379,8 @@ namespace Assets.Scripts.Core
                 {
                     Item_ID = item.ID,
                     capacidadeMax = 20,
-                    tipoMunicao = TipoConsumivel._762x39.GetHashCode()
+                    tipoMunicao = TipoConsumivel._762x39.GetHashCode(),
+                    tipoAnexo = TipoAnexo.AK100.GetHashCode() + TipoAnexo.AK200.GetHashCode()
                 };
                 db.Insert(carregador);
 
@@ -397,7 +399,8 @@ namespace Assets.Scripts.Core
                 {
                     Item_ID = item.ID,
                     capacidadeMax = 15,
-                    tipoMunicao = TipoConsumivel._9mm.GetHashCode()
+                    tipoMunicao = TipoConsumivel._9mm.GetHashCode(),
+                    tipoAnexo = TipoAnexo.Handgun.GetHashCode()
                 };
                 db.Insert(carregador);
 

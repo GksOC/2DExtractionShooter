@@ -17,4 +17,6 @@ public class ItemInstance
 
     [NotNull]
     public float qualidade { get; set; }
+
+    public int? stack { get; set; } //para Itens do tipo Consumível
 }
