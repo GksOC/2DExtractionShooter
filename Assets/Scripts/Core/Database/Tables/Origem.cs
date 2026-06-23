@@ -5,7 +5,7 @@ public class Origem {
     [NotNull, PrimaryKey, AutoIncrement] 
     public int ID { get; set; }
 
-    public int? dono_ID { get; set; } // NULL permitido
+    public int? Dono_ID { get; set; } // NULL permitido
 
     [NotNull] //Enum TipoOrigem
     public int tipoOrigem  { get; set; }

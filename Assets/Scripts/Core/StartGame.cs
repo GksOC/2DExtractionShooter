@@ -1,8 +1,9 @@
 ﻿using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.IO;
 using System.Linq;
-using SQLite4Unity3d;
+using Assets.Scripts.Core.Enuns;
 using System;
 
 namespace Assets.Scripts.Core
@@ -20,7 +21,7 @@ namespace Assets.Scripts.Core
             Debug.Log("[Servidor] Iniciando verificação do sistema de Banco de Dados...");
 
             //isso serve para apagar o bando de dados
-            DatabaseService.Instance.ResetarBancoDeDados();
+            // DatabaseService.Instance.ResetarBancoDeDados();
 
             // Verifica fisicamente se o arquivo do banco já existia antes de abrir o jogo
             if (!File.Exists(dbPath))
@@ -31,9 +32,12 @@ namespace Assets.Scripts.Core
             {
                 Debug.Log("[Servidor] Banco de dados existente encontrado. Verificando integridade das tabelas...");
             }
-            GerarTabelasBase(); //verifiquei que ambas situações resolvem com a mesma função.
+            GerarTabelasBase();
             VerificarEPreencherItens();
-            LogTabelaItens();
+            // LogTabelaItens();
+
+            Debug.Log("Abrindo interface: ");
+            SceneManager.LoadScene("MenuPrincipal_Scene");
         }
 
         private void GerarTabelasBase()
@@ -102,7 +106,7 @@ namespace Assets.Scripts.Core
                 item = new Item
                 { 
                     // O ID possui a constraint AutoIncrement, então omitidos para o SQLite gerar sozinho
-                    tipoItem = TipoItem.Arma.GetHashCode(),
+                    tipoItem = TipoItem.Arma.GetHashCode(), 
                     nome = "AKM", 
                     peso = 3200, 
                     valor = 2700, 

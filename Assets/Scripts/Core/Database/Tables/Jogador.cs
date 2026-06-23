@@ -6,8 +6,8 @@ public class Jogador {
     public int ID { get; set; }
 
     [NotNull, Unique]
-    public int corpo_ID { get; set; }
+    public int Corpo_ID { get; set; }
 
     [NotNull]
-    public int nome { get; set; }
+    public string nome { get; set; }
 }

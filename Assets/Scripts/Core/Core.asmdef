@@ -2,8 +2,8 @@
     "name": "Core",
     "rootNamespace": "",
     "references": [
-        "SQLite",
-        "SQLite4Unity3d"
+        "Unity.TextMeshPro",
+        "SQLite"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

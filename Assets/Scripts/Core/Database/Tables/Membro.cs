@@ -6,6 +6,9 @@ public class Membro
     [PrimaryKey, AutoIncrement] 
     public int ID { get; set; }
 
+    [NotNull]
+    public int Corpo_ID { get; set; }
+
     [NotNull] //Enum NomeMembro
     public int nome { get; set; }
 
