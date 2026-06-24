@@ -6,7 +6,7 @@ public class Inimigo
     [PrimaryKey, AutoIncrement]
     public int ID { get; set; }
 
-    [NotNull, Unique]
+    [NotNull]
     public int Corpo_ID { get; set; }
 
     [NotNull]

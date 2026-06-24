@@ -5,7 +5,6 @@ using UnityEngine;
 public class ProjetilController : MonoBehaviour
 {
     public float velocidade;
-    // Filtro para não acertar o próprio jogador
     public LayerMask layerAlvo; 
     
     private Vector2 posicaoAnterior;
@@ -31,11 +30,11 @@ public class ProjetilController : MonoBehaviour
 
         if (hit.collider != null)
         {
-            Debug.Log($"Acertou: {hit.collider.name}");
-            
-            //IMPLEMENTAR O SISTEMA DE ACERTO
-            //TAMBÉM VERIFICAR PENETRAÇÃO DE PROJÉTIL
-            // Destrói o tiro
+            IDano alvo = hit.collider.GetComponent<IDano>();
+            Debug.Log($"Acertou: {hit.collider.name} ID: {alvo.GetID()}");
+
+            alvo.ReceberDano(60);
+
             Destroy(gameObject); 
             return;
         }

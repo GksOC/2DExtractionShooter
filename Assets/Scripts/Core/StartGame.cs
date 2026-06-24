@@ -21,7 +21,7 @@ namespace Assets.Scripts.Core
             Debug.Log("[Servidor] Iniciando verificação do sistema de Banco de Dados...");
 
             //isso serve para apagar o bando de dados
-            // DatabaseService.Instance.ResetarBancoDeDados();
+            //DatabaseService.Instance.ResetarBancoDeDados();
 
             // Verifica fisicamente se o arquivo do banco já existia antes de abrir o jogo
             if (!File.Exists(dbPath))

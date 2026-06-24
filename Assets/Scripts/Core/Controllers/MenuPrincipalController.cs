@@ -65,12 +65,12 @@ public class MenuPrincipalController : MonoBehaviour
     }
 
 
-    // Fun��o que ser� chamada pelo bot�o "Novo Jogo" na Interface
+    // Funçãoo que será chamada pelo botão "Novo Jogo" na Interface
     public void AoClicarCriarPersonagem()
     {
         var db = DatabaseService.Instance.Connection;
 
-        // Se o bot�o for clicado mas j� existir um save, apagamos ele primeiro
+        // Se o botãoo for clicado mas já existir um save, apagamos ele primeiro
         if (db.Table<Jogador>().Count() > 0)
         {
             ApagarSaveExistente();
@@ -78,15 +78,15 @@ public class MenuPrincipalController : MonoBehaviour
 
         CriarSaveDoJogador();
 
-        // Atualiza a interface logo ap�s criar o personagem, liberando o bot�o "Continuar"
+        // Atualiza a interface logo após criar o personagem, liberando o botão "Continuar"
         VerificarEstadoBotoes();
     }
 
-    // Fun��o que ser� chamada pelo bot�o "Iniciar Raid"
+    // Função que será chamada pelo botão "Iniciar Raid"
     public void AoClicarIniciarJogo()
     {
         Debug.Log("Carregando o mapa...");
-        // Carrega a cena de Gameplay (certifique-se de que o nome � o mesmo salvo no projeto)
+        // Carrega a cena de Gameplay (certifique-se de que o nome é o mesmo salvo no projeto)
         SceneManager.LoadScene("Gameplay_Scene");
     }
 
@@ -102,6 +102,7 @@ public class MenuPrincipalController : MonoBehaviour
             // 1. Cria o Corpo 
             var novoCorpo = new Corpo { nivel = 1, xp = 0, energia = 100, energiaMax = 100, sanidade = 100, sanidadeMax = 100, fome = 100, sede = 100, sono = 0 };
             db.Insert(novoCorpo);
+            Debug.Log(db.Table<Corpo>().FirstOrDefault());
             int corpoId = novoCorpo.ID;
 
             // 2. Cria os Membros
@@ -127,7 +128,7 @@ public class MenuPrincipalController : MonoBehaviour
             db.Insert(origemJogador);
 
             // 5. Cria o Inventário atrelado à Origem
-            var inventarioJogador = new Inventario { Origem_ID = origemJogador.ID, capacidade = 20, espaco = 20 };
+            var inventarioJogador = new Inventario { Origem_ID = origemJogador.ID, capacidade = 20, espaco = 0 };
             db.Insert(inventarioJogador);
 
             // 6. Instancia os Itens Iniciais (ItemInstance) e coloca o Item no Inventário do Jogador (Inventario_Item)
@@ -185,7 +186,6 @@ public class MenuPrincipalController : MonoBehaviour
     {
         var db = DatabaseService.Instance.Connection;
 
-        // A query SQL bruta navegando pelas chaves estrangeiras
         string sql = @"
         SELECT 
             Item.nome AS NomeItem,
@@ -202,13 +202,13 @@ public class MenuPrincipalController : MonoBehaviour
         WHERE Item.nome LIKE ?
         ";
 
-        // O par�metro '?' evita SQL Injection e aplica o filtro
+        // O parâmetro '?' evita SQL Injection e aplica o filtro
         string parametroBusca = $"%{filtroDeBusca}%";
 
         // Executa a query e converte o resultado para a nossa lista de DTOs
         List<ItemInventarioDTO> itensEncontrados = db.Query<ItemInventarioDTO>(sql, parametroBusca);
 
-        TerminalUI.text = $"=== INVENT�RIO DO JOGADOR (Filtro: '{filtroDeBusca}') ===\n\n";
+        TerminalUI.text = $"=== INVENTÁRIO DO JOGADOR (Filtro: '{filtroDeBusca}') ===\n\n";
 
         if (itensEncontrados.Count == 0)
         {
