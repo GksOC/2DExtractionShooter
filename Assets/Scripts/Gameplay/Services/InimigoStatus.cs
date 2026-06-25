@@ -14,7 +14,6 @@ public class InimigoStatus : MonoBehaviour, IDano
     private int cabecaIndex;
     private int torsoIndex;
 
-    private GameObject prefabLoot;
     private GameObject sangue;
 
     public int GetID()
@@ -23,12 +22,11 @@ public class InimigoStatus : MonoBehaviour, IDano
     }
 
     // Recebe o ID e o serviço da Factory
-    public void InicializarInimigo(int ID, int CorpoID, InimigoService service, GameObject prefabLoot, GameObject sangue)
+    public void InicializarInimigo(int ID, int CorpoID, InimigoService service, GameObject sangue)
     {
         this.ID = ID;
         this.CorpoID = CorpoID;
         _service = service;
-        this.prefabLoot = prefabLoot;
         this.sangue = sangue;
         CorpoCompletoDTO ccDTO = _service.GetCorpo(CorpoID);
         membros = ccDTO.membros;
@@ -64,23 +62,15 @@ public class InimigoStatus : MonoBehaviour, IDano
         GetComponent<Collider2D>().enabled = false;
 
         try
-        { 
-        List<Inventario_Item> itensDoInimigo = await _service.ObterItensAsync(ID);
-
-        foreach (var item in itensDoInimigo)
         {
-            // Instancia o objeto no mundo
-            GameObject lootNoChao = Instantiate(prefabLoot, new Vector3(transform.position.x + Random.Range(-0.5f, 0.5f), 
-                                                transform.position.y + Random.Range(-0.5f, 0.5f), 0),
-                                                Quaternion.identity);
-            LootStatus lootStatus = lootNoChao.GetComponent<LootStatus>();
-            //LootStatus.InicializarLoot(lootNoChao.GetInstanceID, );
+            List<Inventario_Item> itensDoInimigo = await _service.ObterItensAsync(ID);
 
-            // TODO no futuro: lootNoChao.GetComponent<LootController>().InicializarItem(item);
-            Debug.Log($"[Drop] Dropou um item com ID de Instância: {item.Item_instance_ID}");
-        }
+            foreach (var item in itensDoInimigo)
+            {
+                ItemFactory.Instance.GerarLootNoMundo(item, transform.position);
+            }
 
-        await _service.DestruirInimigoAsync(ID, CorpoID);
+            await _service.DestruirInimigoAsync(ID, CorpoID);
         }
         catch (System.Exception ex)
         {

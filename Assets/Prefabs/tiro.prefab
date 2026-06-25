@@ -100,4 +100,4 @@ MonoBehaviour:
   velocidade: 30
   layerAlvo:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 256

@@ -17,6 +17,7 @@ namespace Assets.Scripts.Core.Database.Services
             _db = connection;
             this.mundo = mundo;
         }
+
         public CorpoCompletoDTO GetCorpo(int corpoID)
         {
             CorpoCompletoDTO ccDTO = new CorpoCompletoDTO();

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6761748790360832623}
   - component: {fileID: 7768407728074972512}
   - component: {fileID: 696570548405141470}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inimigo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 8534630822495604005}
   - component: {fileID: 8534630822495604002}
   - component: {fileID: 8534630822495604003}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Arma
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8534630823046913534}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LocalDisparo
   m_TagString: Untagged
   m_Icon: {fileID: 0}

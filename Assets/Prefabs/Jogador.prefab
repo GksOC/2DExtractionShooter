@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2370622833481791639}
   - component: {fileID: 1649331862780492121}
   - component: {fileID: 3210382896819988497}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Arma
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 422869006344664063}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LocalDisparo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 2016204135870485780}
   - component: {fileID: 6464740348598202153}
   - component: {fileID: -1559608903450220569}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Jogador
   m_TagString: Untagged
   m_Icon: {fileID: 0}

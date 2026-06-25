@@ -8,7 +8,6 @@ using UnityEngine;
 public class InimigosFactory : MonoBehaviour
 {
     public GameObject prefabInimigo;
-    public GameObject prefabLoot;
     public GameObject sangue;
 
     private InimigoService _service;
@@ -45,7 +44,7 @@ public class InimigosFactory : MonoBehaviour
             InimigoStatus status = inimigo.GetComponent<InimigoStatus>(); 
 
             // 2. Injeta o ID único do inimigo e a referência do serviço compartilhado
-            status.InicializarInimigo(novoInimigo.ID, novoInimigo.Corpo_ID, _service, prefabLoot, sangue);
+            status.InicializarInimigo(novoInimigo.ID, novoInimigo.Corpo_ID, _service, sangue);
             Debug.Log("Inimigo ID: " + novoInimigo.ID + " criado!");
         }
     }

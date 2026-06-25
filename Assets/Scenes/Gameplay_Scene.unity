@@ -169,6 +169,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &700144298
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 700144300}
+  - component: {fileID: 700144299}
+  m_Layer: 0
+  m_Name: Fabrica de Loot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &700144299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700144298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49f38edc5e455b040a7d027a0b71fea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabLoot: {fileID: 4643431830848714523, guid: b88d4031bd8c05f45996bbb7dcacb749, type: 3}
+--- !u!4 &700144300
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700144298}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.9548112, y: -1.6737641, z: -0.0058348244}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1094370904
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,7 +362,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabInimigo: {fileID: 7628652989069334306, guid: 09a64c97181b93347ba109718d91f851, type: 3}
-  prefabLoot: {fileID: 4643431830848714523, guid: b88d4031bd8c05f45996bbb7dcacb749, type: 3}
   sangue: {fileID: 5564266837891655481, guid: 2c1306f1436aad048b980943872663c9, type: 3}
 --- !u!4 &1308452271
 Transform:

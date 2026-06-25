@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class JogadorController : MonoBehaviour
 {
@@ -46,6 +47,11 @@ public class JogadorController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             AlternarSaqueDaArma();
+        }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            SceneManager.LoadScene("Boot_Scene");
         }
 
         //obter a posição do mouse em relação ao mundo

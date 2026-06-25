@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 4601636058296954905}
   - component: {fileID: 1592285600319226086}
   - component: {fileID: -9196763316614728438}
-  m_Layer: 1
+  - component: {fileID: -2845995262601273338}
+  m_Layer: 10
   m_Name: Loot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,3 +102,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &-2845995262601273338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4643431830848714523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d14ac7d30e0be42acdaad6f8ab36ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerAlvo:
+    serializedVersion: 2
+    m_Bits: 0
